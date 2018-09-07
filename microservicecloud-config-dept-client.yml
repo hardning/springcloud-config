@@ -46,3 +46,50 @@ info:
   company.name: www.atguigu.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
+
+
+
+
+---
+server:
+  port: 9005
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.atguigu.springcloud.entities
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml
+
+spring:
+  profiles: test
+  application:
+    name: microservicecloud-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloudDB02?useSSL=false
+    username: root
+    password: 1a2s3d4f
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+      max-wait-millis: 200
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver7004:7004/eureka
+  instance:
+    #appname: deptservice #指定微服务实例名称，可以覆盖spring.application.name
+    instance-id: microservicecloud-dept9005 #实例ID
+    prefer-ip-address: true #优先使用ip地址访问服务，否则优先hostname
+    hostname: localhost #指定域名
+    #ip-address: 127.0.0.1 #指定ip
+    
+    
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
